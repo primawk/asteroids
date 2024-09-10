@@ -45,11 +45,14 @@ def main():
 
         for obj in shots:
           obj.draw(screen)
-
-        for obj in shots:
           obj.update(dt)
 
         for obj in asteroids:
+          for bullet in shots:
+            if obj.is_colliding(bullet) == True:
+              obj.split()
+              bullet.kill()
+
           if obj.is_colliding(player) == True:
             sys.exit("Game over!")
 
